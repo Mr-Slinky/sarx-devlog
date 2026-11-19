@@ -1,0 +1,766 @@
+/*
+ * The palette comes from the first frame that Sarx draws. The sky is the renderer's clear colour,
+ * the ground is its two checker greens, and the hand is the colour that the renderer gives the hand.
+ * Each value is the sRGB form of the linear colour in the renderer.
+ */
+:root {
+    --sky:          #597c95;
+    --sky-high:     #46667c;
+    --haze:         #9db4c4;
+    --ground-light: #a1c495;
+    --ground-dark:  #8daf81;
+    --hand:         #edd1bf;
+
+    --paper:        #e9eff2;
+    --ink:          #17232c;
+    --ink-soft:     #4a5a66;
+    --accent:       #3b6630;
+    --rule:         #c9d5dc;
+
+    --page:         #f7fafb;
+    --page-grid:    rgb(89 124 149 / 0.11);
+    --spine:        rgb(23 35 44 / 0.3);
+    /* Claude's orange, darkened on light pages so that small text stays readable */
+    --claude:       #b85a38;
+
+    --clay:         #b5704a;
+    --glass:        #a9dcd8;
+    --wood:         #8a5a2e;
+
+    --font-display: "Bricolage Grotesque", "Segoe UI", sans-serif;
+    --font-body:    "Literata", Georgia, serif;
+
+    --gutter:       clamp(1rem, 5vw, 4rem);
+    --measure:      38rem;
+
+    color-scheme: light dark;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+        --sky-high: #2e4557;
+        --paper:    #121b22;
+        --ink:      #dce5eb;
+        --ink-soft: #9fb0bc;
+        --accent:   #a1c495;
+        --rule:     #26343f;
+        --page:     #18232c;
+        --page-grid: rgb(157 180 196 / 0.07);
+        --spine:    rgb(0 0 0 / 0.55);
+        --claude:   #d97757;
+    }
+}
+
+:root[data-theme="dark"] {
+    --sky-high: #2e4557;
+    --paper:    #121b22;
+    --ink:      #dce5eb;
+    --ink-soft: #9fb0bc;
+    --accent:   #a1c495;
+    --rule:     #26343f;
+    --page:     #18232c;
+    --page-grid: rgb(157 180 196 / 0.07);
+    --spine:    rgb(0 0 0 / 0.55);
+    --claude:   #d97757;
+}
+
+/* ========================================================================================== */
+/*                                           Base                                             */
+/* ========================================================================================== */
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html {
+    -webkit-text-size-adjust: 100%;
+}
+
+body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--font-body);
+    font-size: 1.1875rem;
+    line-height: 1.65;
+    font-optical-sizing: auto;
+    overflow-x: hidden;
+}
+
+h1,
+h2 {
+    font-family: var(--font-display);
+    font-optical-sizing: auto;
+    margin: 0;
+}
+
+p {
+    margin: 0 0 1.1em;
+}
+
+a {
+    color: var(--accent);
+    text-underline-offset: 0.18em;
+}
+
+:focus-visible {
+    outline: 3px solid var(--accent);
+    outline-offset: 3px;
+}
+
+.skip-link {
+    position: absolute;
+    left: var(--gutter);
+    top: -4rem;
+    z-index: 10;
+    padding: 0.5rem 1rem;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--font-display);
+}
+
+.skip-link:focus {
+    top: 1rem;
+}
+
+/* ========================================================================================== */
+/*                                           Hero                                             */
+/* ========================================================================================== */
+
+/* The hero repeats the scene that Sarx draws: a sky, and a checkered ground beneath the hand. */
+.hero {
+    position: relative;
+    min-height: max(34rem, 88svh);
+    overflow: hidden;
+    background: linear-gradient(to bottom, var(--sky-high) 0%, var(--sky) 38%, var(--haze) 58%);
+    isolation: isolate;
+}
+
+.hero-text {
+    position: relative;
+    z-index: 2;
+    padding: clamp(3rem, 9vh, 6rem) var(--gutter) 0;
+    max-width: 72rem;
+}
+
+.wordmark {
+    color: var(--hand);
+    font-size: clamp(5.5rem, 21vw, 15rem);
+    font-weight: 800;
+    font-variation-settings: "opsz" 96;
+    line-height: 0.82;
+    letter-spacing: -0.055em;
+    margin-left: -0.04em;
+}
+
+.lede {
+    max-width: 30rem;
+    margin-top: clamp(1.25rem, 3vh, 2rem);
+    color: #f4f7f9;
+    font-size: clamp(1.125rem, 1.6vw, 1.3125rem);
+    line-height: 1.55;
+}
+
+/* The ground starts at the horizon, 58% of the way down, and fills the rest of the hero. */
+.ground {
+    position: absolute;
+    inset: 58% 0 0;
+    z-index: 0;
+    perspective: 32rem;
+    perspective-origin: 50% 0;
+    overflow: hidden;
+}
+
+/* The plane stands on the hero's bottom edge, then tips back, so that its far end meets the horizon. */
+.ground-plane {
+    position: absolute;
+    left: -150%;
+    right: -150%;
+    bottom: 0;
+    height: 900%;
+    transform-origin: 50% 100%;
+    transform: rotateX(76deg);
+    background:
+        repeating-conic-gradient(var(--ground-light) 0 25%, var(--ground-dark) 0 50%)
+        50% 100% / 9rem 9rem;
+}
+
+/* The haze softens the far squares into the sky, as distance would. */
+.ground::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, var(--haze) 0%, rgb(157 180 196 / 0) 45%);
+}
+
+/* The script places the shadow under the cursor. It stays still where the script cannot run. */
+.hand-shadow {
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 1;
+    width: 15rem;
+    height: 4.5rem;
+    margin: -2.25rem 0 0 -7.5rem;
+    border-radius: 50%;
+    background: radial-gradient(closest-side, rgb(23 45 28 / 0.5), rgb(23 45 28 / 0.28) 55%, rgb(23 45 28 / 0));
+    pointer-events: none;
+    transform: translate(70vw, calc(max(34rem, 88svh) * 0.8)) scale(0.8);
+    will-change: transform;
+}
+
+/* ========================================================================================== */
+/*                                          Sections                                          */
+/* ========================================================================================== */
+
+main {
+    padding: clamp(3rem, 8vw, 6rem) var(--gutter) 0;
+}
+
+.section {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1rem;
+    max-width: 64rem;
+    margin: 0 auto;
+    padding-bottom: clamp(3rem, 7vw, 5rem);
+}
+
+@media (min-width: 56rem) {
+    .section {
+        grid-template-columns: 15rem minmax(0, var(--measure));
+        gap: 3rem;
+    }
+}
+
+.section h2 {
+    font-size: clamp(1.75rem, 3vw, 2.125rem);
+    font-weight: 700;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+}
+
+.section-body {
+    max-width: var(--measure);
+}
+
+.aside {
+    color: var(--ink-soft);
+    font-style: italic;
+}
+
+/* ---- Materials ---- */
+
+.materials {
+    list-style: none;
+    margin: 0 0 1.4em;
+    padding: 0;
+}
+
+.materials li {
+    display: flex;
+    align-items: center;
+    gap: 0.9rem;
+    padding: 0.35rem 0;
+}
+
+.swatch {
+    flex: none;
+    width: 1.6rem;
+    height: 1.6rem;
+    border-radius: 0.4rem;
+}
+
+.swatch-clay {
+    background: var(--clay);
+}
+
+.swatch-glass {
+    background: linear-gradient(135deg, #e6f7f5 0%, var(--glass) 45%, #7cc1bc 100%);
+    box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.6);
+}
+
+.swatch-wood {
+    background: repeating-linear-gradient(100deg, var(--wood) 0 0.3rem, #7a4e26 0.3rem 0.45rem);
+}
+
+/* ---- Crates ---- */
+
+.pantheon {
+    margin: 1.5rem 0 0;
+}
+
+.god {
+    padding: 1.1rem 0;
+    border-top: 1px solid var(--rule);
+}
+
+.god:last-child {
+    border-bottom: 1px solid var(--rule);
+}
+
+.god dt {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+.god dd {
+    margin: 0;
+}
+
+.god .domain {
+    color: var(--ink-soft);
+    font-style: italic;
+    font-size: 1rem;
+    margin-bottom: 0.35rem;
+}
+
+/* ---- The log ---- */
+
+.empty {
+    color: var(--ink-soft);
+}
+
+.month-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.month-list a {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+/* ========================================================================================== */
+/*                                         Month page                                         */
+/* ========================================================================================== */
+
+.log-page {
+    display: grid;
+    grid-template-columns: 15rem minmax(0, 1fr);
+    min-height: 100vh;
+}
+
+/* ---- Sidebar ---- */
+
+.sidebar {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow-y: auto;
+    padding: 2.25rem 1.5rem;
+    border-right: 1px solid var(--rule);
+}
+
+.sidebar-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.sidebar-home {
+    color: var(--ink);
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    text-decoration: none;
+}
+
+.sidebar-toggle {
+    display: none;
+}
+
+.sidebar-years {
+    margin-top: 2rem;
+}
+
+.sidebar-prelude {
+    display: block;
+    margin-bottom: 1rem;
+    color: var(--ink-soft);
+    font-family: var(--font-display);
+    font-size: 1.125rem;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.sidebar-prelude:hover,
+.sidebar-prelude[aria-current="page"] {
+    color: var(--ink);
+}
+
+.sidebar details + details {
+    margin-top: 1rem;
+}
+
+.sidebar summary {
+    cursor: pointer;
+    font-family: var(--font-display);
+    font-size: 1.125rem;
+    font-weight: 700;
+}
+
+.sidebar ul {
+    list-style: none;
+    margin: 0.5rem 0 0;
+    padding: 0;
+}
+
+.sidebar li a {
+    display: block;
+    padding: 0.3rem 0 0.3rem 1rem;
+    border-left: 2px solid var(--rule);
+    color: var(--ink-soft);
+    text-decoration: none;
+}
+
+.sidebar li a:hover {
+    color: var(--ink);
+}
+
+.sidebar li a[aria-current="page"] {
+    border-left-color: var(--accent);
+    color: var(--ink);
+    font-weight: 600;
+}
+
+/* ---- Logbook ---- */
+
+.log-main {
+    max-width: 78rem;
+    padding: clamp(2rem, 5vw, 3.5rem) var(--gutter) 4rem;
+}
+
+.month-title {
+    margin-bottom: clamp(1.5rem, 3vw, 2.25rem);
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: -0.035em;
+}
+
+/* The book is the one object on the page, so it alone takes a shadow. */
+.logbook {
+    overflow: hidden;
+    border-radius: 0.5rem;
+    background: var(--page);
+    box-shadow: 0 1.25rem 2.5rem -1.5rem rgb(23 35 44 / 0.5);
+}
+
+/* The strip lays the spreads side by side, and snaps to one whole spread at a time. */
+.strip {
+    display: flex;
+    align-items: flex-start;
+    overflow-x: auto;
+    overflow-y: hidden;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    transition: height 0.3s ease;
+}
+
+.strip::-webkit-scrollbar {
+    display: none;
+}
+
+.strip:focus-visible {
+    outline-offset: -3px;
+}
+
+/* Each spread is two facing pages of squared paper, shaded towards the spine. */
+.spread {
+    flex: 0 0 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 36rem;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+    background-image:
+        linear-gradient(var(--page-grid) 1px, transparent 1px),
+        linear-gradient(90deg, var(--page-grid) 1px, transparent 1px);
+    background-size: 1.5rem 1.5rem;
+}
+
+.page {
+    padding: clamp(1.5rem, 3.5vw, 3rem);
+    font-size: 1.0625rem;
+    line-height: 1.7;
+}
+
+.page-left {
+    box-shadow: inset -2rem 0 2rem -1.75rem var(--spine);
+}
+
+.page-right {
+    box-shadow: inset 2rem 0 2rem -1.75rem var(--spine);
+}
+
+.entry-date {
+    margin-bottom: 1.25rem;
+    font-size: 1.625rem;
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.015em;
+}
+
+.page h3 {
+    margin: 1.75em 0 0.5em;
+    color: var(--ink-soft);
+    font-family: var(--font-display);
+    font-size: 1.125rem;
+    font-weight: 700;
+}
+
+/* An undated entry runs its text down the left page, then on to the right, as a book would. */
+.spread-flowing {
+    grid-template-columns: 1fr;
+    background-image:
+        linear-gradient(90deg, transparent calc(50% - 2rem), var(--spine) 50%, transparent calc(50% + 2rem)),
+        linear-gradient(var(--page-grid) 1px, transparent 1px),
+        linear-gradient(90deg, var(--page-grid) 1px, transparent 1px);
+    background-size: 100% 100%, 1.5rem 1.5rem, 1.5rem 1.5rem;
+}
+
+.page-flow {
+    column-count: 2;
+    column-gap: clamp(3rem, 7vw, 6rem);
+}
+
+.page-flow > .entry-date {
+    column-span: all;
+}
+
+.page-flow h3 {
+    break-after: avoid;
+}
+
+.page-right figure {
+    margin: 0;
+}
+
+.page-right img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 0.25rem;
+}
+
+.page-right figcaption {
+    margin-top: 0.75rem;
+    color: var(--ink-soft);
+    font-size: 0.9375rem;
+    font-style: italic;
+}
+
+/* ---- Commits ---- */
+
+.commits h3 {
+    margin-top: 0;
+    margin-bottom: 1rem;
+}
+
+/* Separates the commits from a screenshot above them on the same page. */
+.page-right figure + .commits {
+    margin-top: 2rem;
+}
+
+.commits ol {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.commits li {
+    display: grid;
+    grid-template-columns: 4.75rem minmax(0, 1fr);
+    column-gap: 0.75rem;
+    padding: 0.6rem 0;
+    border-bottom: 1px dashed var(--rule);
+    font-size: 0.9375rem;
+    line-height: 1.45;
+}
+
+.commit-hash {
+    grid-row: span 3;
+    padding-top: 0.15rem;
+    color: var(--ink-soft);
+    font-family: Consolas, "Cascadia Mono", monospace;
+    font-size: 0.8125rem;
+}
+
+.commit-kind {
+    color: var(--ink-soft);
+    font-family: var(--font-display);
+    font-size: 0.8125rem;
+    font-weight: 600;
+}
+
+.commit-agent {
+    color: var(--claude);
+    font-size: 0.8125rem;
+    font-style: italic;
+    font-weight: 600;
+}
+
+.commits-empty {
+    color: var(--ink-soft);
+}
+
+/* ---- Controls ---- */
+
+.controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.turn {
+    width: 2.75rem;
+    height: 2.75rem;
+    border: 1px solid var(--rule);
+    border-radius: 50%;
+    background: var(--page);
+    color: var(--ink);
+    font-size: 1.5rem;
+    line-height: 1;
+    cursor: pointer;
+}
+
+.turn:disabled {
+    opacity: 0.35;
+    cursor: default;
+}
+
+.dots {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.dot {
+    width: 1.5rem;
+    height: 1.5rem;
+    padding: 0;
+    border: 0;
+    background: none;
+    cursor: pointer;
+}
+
+.dot::before {
+    content: "";
+    display: block;
+    width: 0.55rem;
+    height: 0.55rem;
+    margin: auto;
+    border-radius: 50%;
+    background: var(--rule);
+}
+
+.dot[aria-current="true"]::before {
+    background: var(--accent);
+}
+
+.counter {
+    min-width: 4.5rem;
+    margin: 0;
+    color: var(--ink-soft);
+    font-family: var(--font-display);
+    font-size: 0.9375rem;
+    text-align: center;
+}
+
+/* ---- Narrow screens ---- */
+
+/* Below this width, the sidebar folds into a bar above the book, and each spread stacks its pages. */
+@media (max-width: 56rem) {
+    .log-page {
+        display: block;
+    }
+
+    .sidebar {
+        position: static;
+        height: auto;
+        padding: 1rem var(--gutter);
+        border-right: 0;
+        border-bottom: 1px solid var(--rule);
+    }
+
+    .sidebar-toggle {
+        display: block;
+        padding: 0.4rem 0.9rem;
+        border: 1px solid var(--rule);
+        border-radius: 999px;
+        background: none;
+        color: var(--ink);
+        font-family: var(--font-display);
+        font-size: 0.9375rem;
+        cursor: pointer;
+    }
+
+    .sidebar-years {
+        display: none;
+        margin-top: 1rem;
+    }
+
+    .sidebar.is-open .sidebar-years {
+        display: block;
+    }
+
+    .spread {
+        grid-template-columns: 1fr;
+        min-height: 0;
+    }
+
+    .page-left,
+    .page-right {
+        box-shadow: none;
+    }
+
+    .page-right {
+        border-top: 1px dashed var(--rule);
+    }
+
+    .page-flow {
+        column-count: 1;
+    }
+
+    .spread-flowing {
+        background-image:
+            linear-gradient(var(--page-grid) 1px, transparent 1px),
+            linear-gradient(90deg, var(--page-grid) 1px, transparent 1px);
+        background-size: 1.5rem 1.5rem;
+    }
+
+    /* The counter alone tells the reader where they are, since a row of dots would wrap here */
+    .dots {
+        display: none;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .strip {
+        transition: none;
+    }
+}
+
+/* ========================================================================================== */
+/*                                          Footer                                            */
+/* ========================================================================================== */
+
+.footer {
+    max-width: 64rem;
+    margin: 0 auto;
+    padding: 2rem var(--gutter) 3rem;
+    color: var(--ink-soft);
+    font-size: 1rem;
+}

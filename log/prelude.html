@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Prelude Log</title>
+    <meta name="description" content="The prelude to the Sarx development log: why Sarx exists, and how AI takes part in building it.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Literata:ital,opsz,wght@0,7..72,400..600;1,7..72,400&display=swap">
+    <link rel="stylesheet" href="../css/style.css">
+    <script src="../data/months.js" defer></script>
+    <script src="../js/site.js" defer></script>
+    <script src="../js/logbook.js" defer></script>
+</head>
+<body class="log-page" data-root="../" data-month="prelude">
+    <a class="skip-link" href="#main">Skip to the prelude</a>
+
+    <nav class="sidebar" aria-label="Months of the log"></nav>
+
+    <main id="main" class="log-main">
+        <h1 class="month-title">Prelude</h1>
+
+        <div class="logbook">
+        <article class="entry" id="motivation" data-title="Motivation">
+            <p>I played Black and White 2 as a kid, and I loved it. It went many years without a thought in my head until a random urge in my mid-20s to play the game again. I am sure this is common: feeling nostalgic about a game and wanting to re-experience it. I had similar feelings with games like Ratchet and Clank or Destroy All Humans. But replaying those games did not bring me quite the same joy as playing when I was younger. BW2 was different!</p>
+            <p>I got the game off Abandonware and kicked off a new profile. The game felt somewhat fresh, as if I had not been focused when I played it the first time. Like, the game was never really meant for me as a kid in the first place; it was meant for me as an adult. I had a similar experience with Spore as well.</p>
+            <p>And after playing it for some time, I naturally began wondering how an old game like this would look and feel in the 2020s. Surely with the advancement of gaming tech, someone has made a successor to this game that is even better than the original!?</p>
+            <p>No... The best thing is Godus, created by the alleged mastermind of BW2. "Alleged" being a massive keyword there! If this guy was indeed the mastermind behind BW2, then he would recreate it without much issue. And yet, Godus just lacked SO MUCH character! There was no hand, no creature, and the land itself looked like a world made on pancakes. I won't even mention the mobile aspects of the game.</p>
+            <p>At this point in time, I only knew Java. I have tackled C and C++ in the past, but found them quite intimidating! I also had nothing to build in those languages that I could not build better in Java. That was, until I tried my hand at ECS architecture, which is a DOD principle, which Java fights against with its lack of memory control. I tried Zig, having heard good things about it, but gave it up quickly since it was pre-1.0 and constantly undergoing breaking changes. Rust was my final hope. After failing at C, C++, and Zig, Rust had to be the first low-level language I could actually master.</p>
+            <p>Ironically, I see now that Rust is much more complex than C. More complex than C++? Hard to tell, as I never made it too far in C++. But also, both of those languages are so old and bloated, whereas Rust was new and lean, at least in comparison.</p>
+            <p>The Rust Book also tricked me! Perhaps in a good way! It showed me syntax and concepts that felt similar enough to Java that learning it was easy. By the time I got chucked into concepts like unsafe Rust, it was already too late! Sunk cost fallacy had me hooked on Rust.</p>
+            <p>I would still argue that my Rust knowledge is lacking, but after about a year, it has definitely grown. And I must say, the control Rust gives you over abstraction is addictive!</p>
+        </article>
+
+        <article class="entry" id="ai-debate" data-title="The AI Debate">
+            <p>Assuming great success from this project, it will naturally come under public scrutiny, especially over the part AI played in it. Quite frankly, I don't think something of this scale would be possible for one person <em>without</em> AI.</p>
+            <p>Nevertheless, the common critique is sound. AI was trained on largely any data that its company could get its hands on, and the authors of that data did not necessarily consent to it being used for training. This matters most for creative work, such as 2D and 3D assets, music, and some kinds of writing, where the AI's output stands in for something a person would have made.</p>
+            <p>That leaves me with two questions. Is using AI an unethical use of contemporary technology? And does presenting work to the public as my own, when AI was involved, liken to stealing or fraud?</p>
+            <p>They are certainly relevant questions, and I think many do themselves a disservice by giving a black or white answer.</p>
+            <p>There are those who would argue that AI is just another tool like any other, born out of the advancements of modern technology. But this argument does not give credit to the fact that AI can be used as more than a tool. Articulating an idea in a few short sentences, and receiving some materialisation of that idea almost instantly, is not using a tool, but rather a service.</p>
+            <p>Conversely, there are those who would argue that any use of AI is unethical, or that using it is laziness by default. This argument feels overtly defensive, and fails to recognise the genuine usefulness of this new and powerful technology.</p>
+            <h3>Consent</h3>
+            <p>On the first question, I keep coming back to where the consent problem actually bites, which is creative work. The art in Sarx is not generated, despite the temptation to do so, given my lack of skill in 3D modelling. The hand was sourced from free assets online, and AI only wrote the scripts that polished its hand poses after I struggled to manually rig it. The look of the land, the hand and the creature are my decisions. Where I have been leaning on AI is code, explanation, review and documentation, which is where its training data was most often shared openly to begin with. It doesn't make the question disappear, but it puts my use at the end of the spectrum where I can defend it!</p>
+            <h3>Effort</h3>
+            <p>The second question is the harder one. I personally struggle to formulate my own argument outside the rhetoric of programming. Take Python, which some developers may argue is too abstract and hides too much from the programmer. AI use in development feels like the next level of abstraction, and an imperfect one at that. A developer can write a program in Python with much of the underlying machinery a mystery to them. Of course, the prowess of the developer is still a large factor in their success or failure, as is their grit to push past tough problems.</p>
+            <p>While I certainly find this to be a useful comparison, it ignores much of the nuance that AI has brought to the game. A person who knows nothing about code can now generate an application, alongside the many assets that application might need. The effort is extraordinarily low. So, between Python and AI, AI has certainly crossed some threshold of effort that humans have subconsciously used to judge the value of a product.</p>
+            <p>I think the real difference is this. Python hides machinery that someone, somewhere, understood, and it behaves the same way every time. AI hands you output that nobody has understood until you read it. So the effort doesn't disappear with AI; it moves to the reading, and that's exactly the part people often skip. I know, because I have been guilty of this far too often.</p>
+            <p>But this cuts both ways! I am sure many developers have got carried away in their adoption of AI, only to produce some ungodly amount of code that functions, but that they didn't REALLY make. They just prompted it into existence. This is much of the reason why I still prefer writing most code, especially foundational code, by myself. It's not very efficient by modern standards, and it's even a poor business decision, but I feel good about the code I write, which matters to me. It's the whole reason I got into programming; perpetually chasing that feeling of accomplishment.</p>
+            <p>With this line of reasoning, it seems that the currency is effort, not AI per se. This is a large part of why this dev log exists at all: to record the effort that went into building Sarx. Importantly, that effort still involved AI. Like I said, this project would not be possible without it.</p>
+            <h3>How I use AI</h3>
+            <p>The biggest thing AI does for me is teach. Graphics programming and game architecture were entirely new to me when I started. AI explains the concepts as I reach them, reviews my Rust the way a peer would, and shows me what a design will look like in code before I commit to it. I'm still the one who has to understand it, and that part is slow and takes real effort. AI just means I'm never stuck without someone to ask.</p>
+            <p>I'll also be honest that I don't write every line first. Some foundational pieces, parts of the ECS for example, I asked AI to build to a complete, working state, and then I studied them afterwards. I'd wasted too much time understanding every detail of code that was going to change the next day. Reviewing finished code teaches me more, and leaves me free to change the design once I understand it. The effort there goes into the studying rather than the typing.</p>
+            <p>Docs, tests, and ADRs are the type of grunt work that AI does most, which keeps me from burning out. It's also easy for me to review in large chunks, as opposed to programming logic, which is far more cognitively demanding to parse. This is the luxury that AI affords me.</p>
+        </article>
+        </div>
+    </main>
+</body>
+</html>

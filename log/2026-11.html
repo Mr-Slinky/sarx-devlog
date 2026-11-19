@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>November 2026 Log</title>
+    <meta name="description" content="The Sarx development log for November 2026, one diary entry per day, with that day's commits.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Literata:ital,opsz,wght@0,7..72,400..600;1,7..72,400&display=swap">
+    <link rel="stylesheet" href="../css/style.css">
+    <script src="../data/months.js" defer></script>
+    <script src="../data/commits/2026-11.js" defer></script>
+    <script src="../js/site.js" defer></script>
+    <script src="../js/logbook.js" defer></script>
+</head>
+<body class="log-page" data-root="../" data-month="2026-11">
+    <a class="skip-link" href="#main">Skip to the entries</a>
+
+    <nav class="sidebar" aria-label="Months of the log"></nav>
+
+    <main id="main" class="log-main">
+        <h1 class="month-title">November 2026</h1>
+
+        <div class="logbook" data-month="2026-11">
+        <article class="entry" id="18" data-date="2026-11-18">
+            <p>Finally, after <strong>more than a month</strong>, I have a full vertical slice of the game that I can start fleshing out. I really chose to do this the long way! And part of me wants to take what I have learnt as a win, and just start using an engine. However, I know there is still a TON more to learn in terms of graphics engines.</p>
+            <p>This vertical slice did wonders for me finally understanding the individual pieces of the code I had written so far. The render module, Amaterasu, finally makes sense to me! I have written that boilerplate out at least four times now, but always to render triangles or cubes or some other crap. Now, there is some actual comparisons between the hand and the ground as well as between initialisation and drawing, that I finally have a clear picture in my head of what this pipeline is and what is involved therein.</p>
+            <p>Still a few pieces to consolidate, which is vital if I am to clean up the code as it stands and make an actual rendering module! What we have now is very much a "Hello, Hand" project!</p>
+            <p>Next up is getting the poses - that I got working in Blender - to work here. That means building SKINNING? Whatever that means. We'll see how well buddy Claude can explain it, and what the code reveals!</p>
+            <figure>
+                <img src="../images/2026-11-18-hand.png" width="1920" height="1080" alt="A pale hand and forearm, fingers spread, floating above an endless green checkered ground.">
+                <figcaption>The hand above the checkered ground: the vertical slice.</figcaption>
+            </figure>
+        </article>
+
+        <article class="entry" id="19" data-date="2026-11-19">
+            <p>GTA IV came out today! Not sure much work will be done ;)</p>
+        </article>
+        </div>
+    </main>
+</body>
+</html>
