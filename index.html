@@ -20,8 +20,7 @@
         <div class="hero-text">
             <h1 class="wordmark">Sarx</h1>
             <p class="lede">
-                Sarx is a god game for Windows, built by hand in Rust. It's the successor to Black and
-                White 2 that I wish someone else had made!
+                Sarx is a god game for Windows, built by hand, in Rust. 
             </p>
         </div>
         <div class="ground" aria-hidden="true">
@@ -35,16 +34,12 @@
             <h2 id="about-heading">About this log</h2>
             <div class="section-body">
                 <p>
-                    I write an entry on each day that I work on Sarx. Some days it's a win, like the
-                    hand finally standing above the ground. Other days it's me admitting that I have
-                    no idea what skinning is yet! 
+                    I write an entry on each day that I work on Sarx.
                 </p>
                 <p>
-                    Engines such as Unity and Bevy already provide most of what Sarx needs: drawing
-                    the world, running the game loop and loading models. I build those parts myself
-                    anyway, and I know it's the long way round! The first reason is that I can't
-                    change what a layer does until I understand it. The second is that I want Sarx
-                    to try new things in its genre, like villagers that shatter instead of bleed.
+                    Engines such as Unity and Bevy already provide most of what Sarx needs, like drawing
+                    the world, running the game loop and loading models. I have chosen to build those parts myself
+                    anyway! I am aware that this is the long way round.
                 </p>
                 <p>
                     For now, the code is public on GitHub. Once a small demo is out, the code will
@@ -58,66 +53,19 @@
             <h2 id="game-heading">The game</h2>
             <div class="section-body">
                 <p>
-                    I played Black and White 2 as a kid, and fell in love with it all over again in
+                    I played Black and White 2 as a kid, and fell in love with it again in
                     my mid-20s. When I went looking for a modern successor, the best I found was
-                    Godus, and it lacked SO MUCH character. There was no hand or creature, and the
-                    map looked like a world made of pancakes. So I'm making my own.
+                    Godus, and it lacked much of the character I loved from Black and White.
+					There was no hand or creature, and the map looked like a world made of pancakes. 
+					So... I'm making my own!
                 </p>
                 <p>
-                    In Sarx, you play a god, and you reach into the world through a large,
+                    In Sarx, you play as a god that reaches into the world through a large,
                     disembodied hand. A creature lives among your followers and learns from how you
                     treat it. Up to three rival factions share the map, and you win by defeating
                     each one, either by siege or by building a city so impressive that its people
-                    move to yours.
+                    move to yours. You know the drill...
                 </p>
-                <p>
-                    Here's my own twist: the villagers are made of materials rather than flesh, and
-                    the material decides how a villager breaks.
-                </p>
-                <ul class="materials">
-                    <li><span class="swatch swatch-clay" aria-hidden="true"></span>A villager made of clay splatters.</li>
-                    <li><span class="swatch swatch-glass" aria-hidden="true"></span>A villager made of glass shatters.</li>
-                    <li><span class="swatch swatch-wood" aria-hidden="true"></span>A villager made of wood splinters.</li>
-                </ul>
-                <p class="aside">Sarx is Greek for "flesh". Ironic...</p>
-            </div>
-        </section>
-
-        <section class="section" aria-labelledby="code-heading">
-            <h2 id="code-heading">How the code is split</h2>
-            <div class="section-body">
-                <p>
-                    I've split the game into five Rust crates (for now), and named each one after a god whose
-                    domain matches its job. The entries call the crates by these names, so here's
-                    who's who.
-                </p>
-                <dl class="pantheon">
-                    <div class="god">
-                        <dt>Atum</dt>
-                        <dd class="domain">The first of the Egyptian gods, who created himself</dd>
-                        <dd>Opens the window and starts the rest of the game.</dd>
-                    </div>
-                    <div class="god">
-                        <dt>Zurvan</dt>
-                        <dd class="domain">The Persian god of infinite time</dd>
-                        <dd>Moves the world forward, one fixed step after another.</dd>
-                    </div>
-                    <div class="god">
-                        <dt>Enki</dt>
-                        <dd class="domain">The Mesopotamian god of wisdom and crafts</dd>
-                        <dd>Stores every entity in the world, and the components that define it.</dd>
-                    </div>
-                    <div class="god">
-                        <dt>Amaterasu</dt>
-                        <dd class="domain">The Japanese goddess of the sun</dd>
-                        <dd>Draws the world on the screen, through the GPU.</dd>
-                    </div>
-                    <div class="god">
-                        <dt>Hermes</dt>
-                        <dd class="domain">The Greek messenger of the gods</dd>
-                        <dd>Reads 3D models, such as the hand, from glTF files.</dd>
-                    </div>
-                </dl>
             </div>
         </section>
 
