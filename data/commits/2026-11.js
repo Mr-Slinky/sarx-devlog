@@ -954,6 +954,52 @@ window.SARX_COMMITS["2026-11"] = {
       "type": "test",
       "scope": "zurvan",
       "description": "give each simulation test a set of hand poses"
+    },
+    {
+      "hash": "2d471b6",
+      "type": "feat",
+      "scope": "amaterasu",
+      "description": "add a skinned vertex and build a skinned mesh from the hand's skin"
+    },
+    {
+      "hash": "2cfa98a",
+      "type": "docs",
+      "scope": "",
+      "description": "document every crate and bring the ADRs up to date with the code",
+      "agent": true
+    },
+    {
+      "hash": "7d5dba1",
+      "type": "feat",
+      "scope": "amaterasu",
+      "description": "bend the hand by its bones with a skinned pipeline"
+    },
+    {
+      "hash": "98da4be",
+      "type": "docs",
+      "scope": "",
+      "description": "add a structure chart of the call paths through Sarx"
+    },
+    {
+      "hash": "206f37a",
+      "type": "docs",
+      "scope": "amaterasu",
+      "description": "document the renderer's skinned mesh, bone rotations and new parameters",
+      "agent": true
+    }
+  ],
+  "2026-11-20": [
+    {
+      "hash": "f7ee345",
+      "type": "feat",
+      "scope": "atum",
+      "description": "hold an action pose while its key is down"
+    },
+    {
+      "hash": "8ea2679",
+      "type": "chore",
+      "scope": "amaterasu",
+      "description": "remove unused imports from the context and renderer"
     }
   ]
 };
