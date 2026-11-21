@@ -1000,6 +1000,45 @@ window.SARX_COMMITS["2026-11"] = {
       "type": "chore",
       "scope": "amaterasu",
       "description": "remove unused imports from the context and renderer"
+    },
+    {
+      "hash": "ff71906",
+      "type": "feat",
+      "scope": "atum",
+      "description": "open the game in a 1200 by 900 window in place of borderless fullscreen"
+    },
+    {
+      "hash": "e0db213",
+      "type": "docs",
+      "scope": "zurvan",
+      "description": "make the component comments into doc comments"
+    },
+    {
+      "hash": "31262c0",
+      "type": "feat",
+      "scope": "zurvan",
+      "description": "turn the bones faster towards an action pose than towards an idle pose"
+    },
+    {
+      "hash": "7285cdc",
+      "type": "feat",
+      "scope": "enki",
+      "description": "derive Component and ListComponent",
+      "agent": true
+    },
+    {
+      "hash": "d383528",
+      "type": "refactor",
+      "scope": "zurvan",
+      "description": "derive Component on the simulation's components",
+      "agent": true
+    },
+    {
+      "hash": "5c3e3e4",
+      "type": "docs",
+      "scope": "",
+      "description": "defer the compaction threshold for list columns",
+      "agent": true
     }
   ]
 };

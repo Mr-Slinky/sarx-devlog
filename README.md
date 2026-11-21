@@ -35,12 +35,14 @@ an internet connection to show its own typefaces.
 
 Each entry is an `<article>` in its month's page, with the day as its `id` and the full date in
 `data-date`. The logbook shows the entry's text on the left page. The right page shows the entry's
-`<figure>`, if it has one, and that day's commits otherwise.
+`<figure>`, if it has one, and that day's commits otherwise. Where the diary separates two thoughts
+with `---`, the entry has an `<hr>` between them.
 
 ```html
 <article class="entry" id="18" data-date="2026-11-18">
-    <h3>Rendering</h3>
     <p>The text of the entry, one paragraph per element.</p>
+    <hr>
+    <p>A separate thought from the same day.</p>
     <figure>
         <img src="../images/2026-11/hand.png" alt="The hand above the checkered ground">
         <figcaption>The hand above the checkered ground</figcaption>
